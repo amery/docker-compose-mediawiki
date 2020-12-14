@@ -21,7 +21,7 @@ endif
 
 .PHONY: all files clean files pull build
 .PHONY: up start stop restart logs
-.PHONY: config inspect
+.PHONY: update config inspect
 ifneq ($(SHELL),)
 .PHONY: shell
 endif
@@ -77,6 +77,10 @@ ifneq ($(SHELL),)
 shell: files
 	$(DOCKER_COMPOSE) exec $(NAME) $(SHELL)
 endif
+
+update:
+	git remote update --prune
+	git submodule update --remote --init
 
 config: files
 	$(DOCKER_COMPOSE) config | $(COLOUR_YAML)
