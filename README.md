@@ -1,3 +1,5 @@
+Mediawiki + MariaDB for https://github.com/amery/docker-compose-traefik
+
 ## Getting Started
 
 - fork
@@ -7,5 +9,6 @@
 
 ## See Also
 
-- https://github.com/amery/docker-compose-mediawiki
+- https://www.mediawiki.org/wiki/MediaWiki
+- https://github.com/amery/docker-compose-whoami
 - https://github.com/amery/docker-compose-traefik

@@ -7,15 +7,17 @@ DOCKER_COMPOSE_UP_OPT =
 
 GEN_MK_VARS = TRAEFIK_BRIDGE NAME HOSTNAME
 
-FILES = docker-compose.yml
+FILES = docker-compose.yml nginx.conf
 SHELL = /bin/sh
 
 CONFIG_MK = config.mk
 GEN_MK = gen.mk
 
 ifneq ($(PYGMENTIZE),)
+COLOUR_NGINX = $(PYGMENTIZE) -l nginx
 COLOUR_YAML = $(PYGMENTIZE) -l yaml
 else
+COLOUR_NGINX = cat
 COLOUR_YAML = cat
 endif
 
@@ -62,6 +64,7 @@ up: files
 	$(DOCKER_COMPOSE) up $(DOCKER_COMPOSE_UP_OPT)
 
 start: files
+	mkdir -p .www
 	$(DOCKER_COMPOSE) up -d $(DOCKER_COMPOSE_UP_OPT)
 
 stop: files
@@ -84,6 +87,7 @@ update:
 
 config: files
 	$(DOCKER_COMPOSE) config | $(COLOUR_YAML)
+	$(COLOUR_NGINX) nginx.conf
 
 inspect:
 	$(DOCKER_COMPOSE) ps

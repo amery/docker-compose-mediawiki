@@ -1,0 +1,53 @@
+# vim: set ft=sh ts=4 sw=4 et:
+
+server_tokens off;
+
+server {
+    listen [::]:80 default_server ipv6only=off;
+    server_name @@HOSTNAME@@;
+
+    client_max_body_size 16m;
+    client_body_buffer_size 128k;
+
+    root /srv/http/wiki;
+
+    # entrypoint
+    location = / {
+        rewrite ^ /Main_Page? permanent;
+    }
+
+    # static
+    #
+    location / {
+        expires 8h;
+
+        try_files $uri $uri/ @mediawiki;
+    }
+
+    # catch all
+    #
+    location @mediawiki {
+        rewrite ^ /index.php$request_uri last;
+    }
+
+    # security
+    #
+    location ~ ^/(maintenance|includes|serialized|math|languages|cache)/.* {
+        return 403;
+    }
+
+    location ~ .*/\.git(/.*)?$ {
+        return 403;
+    }
+
+    location ^~ /images/.+\.(html|htm|php)$ {
+        types {}
+        default_type text/plain;
+    }
+
+    # php over fastcgi
+    #
+    location ~ ^(.+\.php)(/.*)?$ {
+        return 500;
+    }
+}

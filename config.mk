@@ -1,3 +1,3 @@
 TRAEFIK_BRIDGE ?= traefiknet
-NAME ?= whoami
+NAME ?= wiki
 HOSTNAME ?= $(NAME).docker.localhost
