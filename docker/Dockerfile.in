@@ -1,0 +1,11 @@
+# vim: set ft=dockerfile ts=4 sw=4 et:
+FROM @@PHP_IMAGE@@
+
+RUN apk --update upgrade -U && apk --no-cache add \
+    php7-simplexml \
+    php7-tokenizer \
+    php7-xmlwriter
+
+RUN ln -snf composer1 /usr/bin/composer
+
+COPY mediawiki.sh /etc/entrypoint.d/

@@ -1,4 +1,5 @@
 docker-compose.yml
 gen.mk
+docker/Dockerfile
 nginx.conf
 .www

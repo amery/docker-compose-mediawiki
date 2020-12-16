@@ -12,8 +12,21 @@ volumes:
 services:
 
   @@NAME@@:
+    container_name: mediawiki
+    build: ./docker
+#   read_only: true
+
+    restart: always
+    volumes:
+      - wiki:/srv/http/wiki
+      - "${PWD}/extensions:/srv/http/wiki/extensions"
+    networks:
+      - default
+
+  nginx:
     container_name: nginx
     image: nginx:alpine
+#   read_only: true
 
     restart: always
     volumes:
@@ -23,9 +36,13 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.@@NAME@@.rule=Host(`@@HOSTNAME@@`)"
+    depends_on:
+      - @@NAME@@
     networks:
+      - default
       - @@TRAEFIK_BRIDGE@@
 
 networks:
   @@TRAEFIK_BRIDGE@@:
     external: true
+  default:

@@ -48,6 +48,9 @@ server {
     # php over fastcgi
     #
     location ~ ^(.+\.php)(/.*)?$ {
-        return 500;
+        fastcgi_pass  mediawiki:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$1;
+        include fastcgi_params;
     }
 }

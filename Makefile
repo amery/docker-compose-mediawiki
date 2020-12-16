@@ -5,9 +5,10 @@ PYGMENTIZE ?= $(shell which pygmentize)
 
 DOCKER_COMPOSE_UP_OPT =
 
-GEN_MK_VARS = TRAEFIK_BRIDGE NAME HOSTNAME
+GEN_MK_VARS = TRAEFIK_BRIDGE NAME HOSTNAME \
+	      PHP_IMAGE
 
-FILES = docker-compose.yml nginx.conf
+FILES = docker-compose.yml docker/Dockerfile nginx.conf
 SHELL = /bin/sh
 
 CONFIG_MK = config.mk
@@ -92,3 +93,4 @@ config: files
 inspect:
 	$(DOCKER_COMPOSE) ps
 	$(DOCKER) network inspect -v $(TRAEFIK_BRIDGE) | $(COLOUR_YAML)
+	$(DOCKER) network inspect -v $(notdir $(CURDIR))_default | $(COLOUR_YAML)
