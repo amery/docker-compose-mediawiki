@@ -6,7 +6,7 @@ volumes:
     driver: local
     driver_opts:
       type: overlay
-      o: "lowerdir=${PWD}/mediawiki,upperdir=${PWD}/www,workdir=${PWD}/.www"
+      o: "lowerdir=${PWD}/mediawiki,upperdir=${PWD}/overlay,workdir=${PWD}/.overlay"
       device: overlay
 
 services:
