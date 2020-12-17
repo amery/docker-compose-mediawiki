@@ -14,7 +14,6 @@ services:
   @@NAME@@:
     container_name: mediawiki
     build: ./docker
-#   read_only: true
 
     restart: always
     volumes:
@@ -25,8 +24,7 @@ services:
 
   nginx:
     container_name: nginx
-    image: nginx:alpine
-#   read_only: true
+    image: @@NGINX_IMAGE@@
 
     restart: always
     volumes:
