@@ -19,6 +19,27 @@ services:
     volumes:
       - wiki:/srv/http/wiki
       - "${PWD}/extensions:/srv/http/wiki/extensions"
+    environment:
+      - MYSQL_DATABASE=@@MYSQL_DATABASE@@
+      - MYSQL_USER=@@MYSQL_USER@@
+      - MYSQL_PASSWORD=@@MYSQL_PASSWORD@@
+    depends_on:
+      - db
+    networks:
+      - default
+
+  db:
+    container_name: db
+    image: @@MYSQL_IMAGE@@
+
+    restart: always
+    volumes:
+      - "./db:/var/lib/mysql"
+    environment:
+      - MYSQL_DATABASE=@@MYSQL_DATABASE@@
+      - MYSQL_USER=@@MYSQL_USER@@
+      - MYSQL_PASSWORD=@@MYSQL_PASSWORD@@
+      - MYSQL_ROOT_PASSWORD=@@MYSQL_ROOT_PASSWORD@@
     networks:
       - default
 
