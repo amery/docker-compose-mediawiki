@@ -8,3 +8,7 @@ MYSQL_PASSWORD ?= user_password
 MYSQL_ROOT_PASSWORD ?= root_password
 NGINX_IMAGE ?= amery/docker-alpine-nginx
 PHP_IMAGE ?= amery/docker-alpine-php7
+WIKI_ADMIN ?= Admin
+WIKI_ADMIN_PASSWORD ?= admin_password
+WIKI_NAME ?= My Mediawiki
+WIKI_URL ?= https://$(HOSTNAME)

@@ -19,10 +19,8 @@ services:
     volumes:
       - wiki:/srv/http/wiki
       - "${PWD}/extensions:/srv/http/wiki/extensions"
-    environment:
-      - MYSQL_DATABASE=@@MYSQL_DATABASE@@
-      - MYSQL_USER=@@MYSQL_USER@@
-      - MYSQL_PASSWORD=@@MYSQL_PASSWORD@@
+    env_file:
+      - "mediawiki.env"
     depends_on:
       - db
     networks:

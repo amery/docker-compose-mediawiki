@@ -4,3 +4,4 @@ docker/Dockerfile
 nginx.conf
 .overlay
 db.env
+mediawiki.env

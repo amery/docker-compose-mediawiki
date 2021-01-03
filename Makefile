@@ -7,7 +7,7 @@ SHELL = /bin/sh
 # generated outputs
 #
 FILES = docker-compose.yml docker/Dockerfile nginx.conf \
-	db.env
+	db.env mediawiki.env
 
 CONFIG_MK = config.mk
 GEN_MK = gen.mk
