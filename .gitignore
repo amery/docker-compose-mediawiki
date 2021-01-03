@@ -3,3 +3,4 @@ gen.mk
 docker/Dockerfile
 nginx.conf
 .overlay
+db.env

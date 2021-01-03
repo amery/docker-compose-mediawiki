@@ -6,7 +6,8 @@ SHELL = /bin/sh
 
 # generated outputs
 #
-FILES = docker-compose.yml docker/Dockerfile nginx.conf
+FILES = docker-compose.yml docker/Dockerfile nginx.conf \
+	db.env
 
 CONFIG_MK = config.mk
 GEN_MK = gen.mk
