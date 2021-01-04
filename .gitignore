@@ -1,7 +1,8 @@
 docker-compose.yml
-gen.mk
 docker/Dockerfile
+gen.mk
 nginx.conf
+nginx.env
 .overlay
 db.env
 mediawiki.env

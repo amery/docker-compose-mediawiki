@@ -45,6 +45,8 @@ services:
     volumes:
       - "wiki:/srv/http/wiki"
       - "./nginx.conf:/etc/nginx/conf.d/default.conf"
+    env_file:
+      - "nginx.env"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.@@NAME@@.rule=Host(`@@HOSTNAME@@`)"
