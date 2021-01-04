@@ -3,6 +3,7 @@ FROM @@PHP_IMAGE@@
 
 RUN apk --update upgrade -U && apk --no-cache add \
     diffutils \
+    imagemagick \
     mariadb-client \
     php7-apcu \
     php7-simplexml \
