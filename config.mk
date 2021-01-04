@@ -1,4 +1,6 @@
 TRAEFIK_BRIDGE ?= traefiknet
+USER_UID ?= $(shell id -ur)
+USER_GID ?= $(shell id -gr)
 NAME ?= wiki
 HOSTNAME ?= $(NAME).docker.localhost
 MYSQL_IMAGE ?= amery/docker-alpine-mariadb
