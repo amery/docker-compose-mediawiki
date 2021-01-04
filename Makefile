@@ -98,7 +98,7 @@ endif
 
 update:
 	git remote update --prune
-	git submodule update --remote --init
+	git submodule update --remote --init --recursive
 
 config: files
 	$(DOCKER_COMPOSE) config | $(COLOUR_YAML)
