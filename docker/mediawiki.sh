@@ -1,14 +1,14 @@
 #!/bin/sh
 
-set -eux
+set -eu
 
 MYSQL_SERVER=db
 
 cd /srv/http/wiki
-composer update
+run-user composer update
 
 create_wiki() {
-	php maintenance/install.php \
+	run-user php maintenance/install.php \
 		--dbserver $MYSQL_SERVER --dbname "$MYSQL_DATABASE" \
 		--dbuser "$MYSQL_USER" --dbpass "$MYSQL_PASSWORD" \
 		--installdbuser root --installdbpass "$MYSQL_ROOT_PASSWORD" \
