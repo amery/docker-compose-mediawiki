@@ -99,7 +99,8 @@ endif
 
 update:
 	git remote update --prune
-	git submodule update --remote --init --recursive
+	git submodule update --remote --init
+	cd mediawiki; git submodule update --init --recursive
 
 config: files
 	$(DOCKER_COMPOSE) config | $(COLOUR_YAML)
