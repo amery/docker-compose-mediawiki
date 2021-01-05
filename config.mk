@@ -1,7 +1,6 @@
 TRAEFIK_BRIDGE ?= traefiknet
 USER_UID ?= $(shell id -ur)
 USER_GID ?= $(shell id -gr)
-SPACE = $(subst ,, )
 NAME ?= wiki
 DOMAIN ?= docker.localhost
 HOSTNAME ?= $(NAME).$(DOMAIN)
@@ -15,7 +14,7 @@ PHP_IMAGE ?= amery/docker-alpine-php7
 WIKI_ADMIN ?= Admin
 WIKI_ADMIN_PASSWORD ?= admin_password
 WIKI_NAME ?= My Mediawiki
-WIKI_NAMESPACE ?= $(subst $(space),_,$(WIKI_NAME))
+WIKI_NAMESPACE ?= $(shell echo "$(WIKI_NAME)" | tr ' ' '_')
 WIKI_URL ?= https://$(HOSTNAME)
 WIKI_CONTACT ?= $(NAME)@$(DOMAIN)
 WIKI_PASSWORD_SENDER ?= $(NAME)-recovery@$(DOMAIN)
