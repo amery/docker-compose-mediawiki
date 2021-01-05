@@ -14,10 +14,12 @@ services:
   @@NAME@@:
     container_name: mediawiki
     build: ./docker
+    image: ${USER}/docker-alpine-mediawiki:latest
 
     restart: always
     volumes:
       - wiki:/srv/http/wiki
+      - "./LocalSettings.php:/srv/http/wiki/OurLocalSettings.php:ro"
     env_file:
       - "mediawiki.env"
     depends_on:

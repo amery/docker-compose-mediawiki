@@ -6,3 +6,5 @@ nginx.env
 .overlay
 db.env
 mediawiki.env
+LocalSettings.php
+OurLocalSettings.php
