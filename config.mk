@@ -22,3 +22,4 @@ WIKI_PASSWORD_SENDER ?= $(NAME)-recovery@$(DOMAIN)
 WIKI_SECRET = 0000000000000000000000000000000000000000000000000000000000000000
 # https://www.browserling.com/tools/random-hex (16 digits)
 WIKI_UPGRADE_KEY = 0000000000000000
+WIKI_LOGO_1X ?= $$wgResourceBasePath/resources/assets/wiki.png
