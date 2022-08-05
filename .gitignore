@@ -8,3 +8,5 @@
 /mediawiki.env
 /LocalSettings.php
 /overlay/OurLocalSettings.php
+/overlay/LocalSettings.php
+/overlay/vendor
