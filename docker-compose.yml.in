@@ -11,8 +11,8 @@ volumes:
 
 services:
 
-  @@NAME@@:
-    container_name: mediawiki
+  wiki:
+    container_name: @@NAME@@-mediawiki
     build: ./docker
     image: ${USER}/docker-alpine-mediawiki:latest
 
@@ -28,7 +28,7 @@ services:
       - default
 
   db:
-    container_name: db
+    container_name: @@NAME@@-db
     image: @@MYSQL_IMAGE@@
 
     restart: always
@@ -40,7 +40,7 @@ services:
       - default
 
   nginx:
-    container_name: nginx
+    container_name: @@NAME@@-nginx
     image: @@NGINX_IMAGE@@
 
     restart: always
@@ -54,7 +54,7 @@ services:
       - "traefik.http.routers.@@NAME@@.rule=Host(`@@HOSTNAME@@`)"
 
     depends_on:
-      - @@NAME@@
+      - wiki
     networks:
       - default
       - @@TRAEFIK_BRIDGE@@
