@@ -69,6 +69,7 @@ files: $(FILES) $(CONFIG_MK) $(GEN_MK) .gitignore
 
 pull: files
 	$(DOCKER_COMPOSE) pull
+	git submodule update --init
 
 build: files
 	$(DOCKER_COMPOSE) build --pull
