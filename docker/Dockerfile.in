@@ -6,6 +6,7 @@ RUN apk --update upgrade -U && apk --no-cache add \
     imagemagick \
     mariadb-client \
     php7-apcu \
+    php7-calendar \
     php7-simplexml \
     php7-tokenizer \
     php7-xmlwriter \
