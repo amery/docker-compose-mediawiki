@@ -112,4 +112,4 @@ config: files
 inspect:
 	$(DOCKER_COMPOSE) ps
 	$(DOCKER) network inspect -v $(TRAEFIK_BRIDGE) | $(COLOUR_YAML)
-	$(DOCKER) network inspect -v $(notdir $(CURDIR))_default | $(COLOUR_YAML)
+	$(DOCKER) network inspect -v $(NAME)_default | $(COLOUR_YAML)
