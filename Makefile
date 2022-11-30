@@ -37,7 +37,7 @@ TEMPLATES = $(addsuffix .in, $(FILES))
 DEPS = $(GET_VARS_SH) $(TEMPLATES) Makefile
 GEN_MK_VARS = $(shell $(GET_VARS_SH) $(TEMPLATES))
 
-.PHONY: all files clean files pull build
+.PHONY: all files clean mrproper pull build
 .PHONY: up start stop restart logs
 .PHONY: update config inspect
 ifneq ($(SHELL),)
@@ -50,6 +50,9 @@ all: pull build
 #
 clean:
 	rm -f $(FILES) *~
+
+mrproper: clean
+	rm -rf overlay/*.lock overlay/vendor
 
 .gitignore: Makefile
 	for x in $(FILES); do \
