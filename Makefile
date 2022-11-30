@@ -1,7 +1,7 @@
 DOCKER ?= docker
 DOCKER_COMPOSE ?= docker-compose
 
-DOCKER_COMPOSE_UP_OPT =
+DOCKER_COMPOSE_UP_OPT ?=
 SHELL = /bin/sh
 
 # generated outputs
@@ -37,7 +37,7 @@ TEMPLATES = $(addsuffix .in, $(FILES))
 DEPS = $(GET_VARS_SH) $(TEMPLATES) Makefile
 GEN_MK_VARS = $(shell $(GET_VARS_SH) $(TEMPLATES))
 
-.PHONY: all files clean files pull build
+.PHONY: all files clean mrproper pull build
 .PHONY: up start stop restart logs
 .PHONY: update config inspect
 ifneq ($(SHELL),)
@@ -50,6 +50,9 @@ all: pull build
 #
 clean:
 	rm -f $(FILES) *~
+
+mrproper: clean
+	rm -rf overlay/*.lock overlay/vendor
 
 .gitignore: Makefile
 	for x in $(FILES); do \
@@ -112,4 +115,4 @@ config: files
 inspect:
 	$(DOCKER_COMPOSE) ps
 	$(DOCKER) network inspect -v $(TRAEFIK_BRIDGE) | $(COLOUR_YAML)
-	$(DOCKER) network inspect -v $(notdir $(CURDIR))_default | $(COLOUR_YAML)
+	$(DOCKER) network inspect -v $(NAME)_default | $(COLOUR_YAML)

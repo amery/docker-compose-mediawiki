@@ -9,9 +9,10 @@ RUN apk --update upgrade -U && apk --no-cache add \
     php7-calendar \
     php7-simplexml \
     php7-tokenizer \
+    php7-xmlreader \
     php7-xmlwriter \
     unzip
 
-ENV COMPOSER_PREFERRED 1
+ENV COMPOSER_PREFERRED 2
 
 COPY mediawiki.sh /etc/entrypoint.d/
