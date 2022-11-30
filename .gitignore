@@ -10,3 +10,5 @@
 /overlay/OurLocalSettings.php
 /overlay/LocalSettings.php
 /overlay/vendor
+/overlay/composer.lock
+/overlay/composer.local.lock
