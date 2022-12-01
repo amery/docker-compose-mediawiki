@@ -1,4 +1,4 @@
 [submodule "mediawiki"]
 	path = mediawiki
 	url = https://phabricator.wikimedia.org/source/mediawiki.git
-	branch = REL1_38
+	branch = REL1_39
