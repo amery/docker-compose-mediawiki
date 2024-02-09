@@ -1,5 +1,6 @@
 DOCKER ?= docker
-DOCKER_COMPOSE ?= docker-compose
+DOCKER_COMPOSE ?= $(DOCKER) compose
+GIT ?= git
 
 DOCKER_COMPOSE_UP_OPT ?=
 SHELL = /bin/sh
@@ -26,9 +27,11 @@ PYGMENTIZE ?= $(shell which pygmentize)
 ifneq ($(PYGMENTIZE),)
 COLOUR_NGINX = $(PYGMENTIZE) -l nginx
 COLOUR_YAML = $(PYGMENTIZE) -l yaml
+COLOUR_JSON = $(PYGMENTIZE) -l json
 else
 COLOUR_NGINX = cat
 COLOUR_YAML = cat
+COLOUR_JSON = cat
 endif
 
 # variables
@@ -104,9 +107,16 @@ shell: files
 endif
 
 update:
-	git remote update --prune
-	git submodule update --remote --init
-	cd mediawiki; git submodule update --init --recursive
+	$(GIT) remote update --prune
+	[ ! -s .gitmodules ] || $(GIT) submodule update --remote --init
+	for x in */.gitmodules; do \
+		if [ -s "$$x" ]; then \
+			cd $$(dirname $$x); \
+			pwd; \
+			$(GIT) submodule update --init --recursive; \
+			cd - > /dev/null; \
+		fi; \
+	done
 
 config: files
 	$(DOCKER_COMPOSE) config | $(COLOUR_YAML)
@@ -114,5 +124,8 @@ config: files
 
 inspect:
 	$(DOCKER_COMPOSE) ps
-	$(DOCKER) network inspect -v $(TRAEFIK_BRIDGE) | $(COLOUR_YAML)
-	$(DOCKER) network inspect -v $(NAME)_default | $(COLOUR_YAML)
+	for x in $(TRAEFIK_BRIDGE) $(NAME)_default; do \
+		if $(DOCKER) network list | grep -q " $$x "; then \
+			$(DOCKER) network inspect -v $$x; \
+		fi; \
+	done | $(COLOUR_JSON)
